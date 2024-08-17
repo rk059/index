@@ -156,7 +156,8 @@ jQuery(document).ready(function () {
    			// 	sentmail(form_id, msg, '');
    			// }
 
-            
+               $('.submitformButton').hide();
+               $('#loaderImage').show();
         
 
                emailjs.send("service_2jxzn6k", "template_45k2l7b", {
@@ -168,8 +169,7 @@ jQuery(document).ready(function () {
               .then(function(response) {
                 alert('Email sent successfully!');
                 
-               $('.submitformButton').hide();
-               $('#loaderImage').show();
+             
 
                 window.location.reload();
               }, function(error) {
