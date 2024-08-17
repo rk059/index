@@ -1,5 +1,6 @@
 var msg_to_sent = "";
 
+
 function emailValidation(form_id, email) {
     jQuery(form_id + ' .has-error').hide();
     var emailExp = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,10}(?:\.[a-z]{2})?)$/i;
@@ -155,6 +156,9 @@ jQuery(document).ready(function () {
    			// 	sentmail(form_id, msg, '');
    			// }
 
+            
+        
+
                emailjs.send("service_2jxzn6k", "template_45k2l7b", {
                 to_name: 'Tirupati Packers Movers',
                 from_name: name,
@@ -163,9 +167,17 @@ jQuery(document).ready(function () {
               })
               .then(function(response) {
                 alert('Email sent successfully!');
+                
+               $('.submitformButton').hide();
+               $('#loaderImage').show();
+
                 window.location.reload();
               }, function(error) {
                 alert('Failed to send email: ' + error.text);
+                
+               $('.submitformButton').show();
+               $('#loaderImage').hide();
+
               });
         }
         return false;
