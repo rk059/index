@@ -1,5 +1,7 @@
 var msg_to_sent = "";
 
+
+
 function emailValidation(form_id, email) {
     jQuery(form_id + ' .has-error').hide();
     var emailExp = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,10}(?:\.[a-z]{2})?)$/i;
@@ -95,52 +97,78 @@ jQuery(document).ready(function () {
 		jQuery(inputspan).html(value);
 			});
 
-    jQuery("form").submit(function () {
-        var form = $(this).attr('id');
-        var form_id = "#" + form;
+            function onSubmit(token) {
+                // document.getElementById("ContactForm0").submit();
+            // }
+    // jQuery("form").submit(function () {
+        // var form = $(this).attr('id');
+        var form_id = "#ContactForm0";
         jQuery(form_id + ' .success').html('');
 		var attach_file = 'true';
         var msg = jQuery(form_id + " .comment").val();
-        if($(form_id).find('input#attach_file').length > 0)
-        {
-        	var attachedFile = $(form_id).find('input#attach_file')[0];
-        if(attachedFile.hasAttribute("file_extension")){
-        	var allowedExts = attachedFile.getAttribute("file_extension");
-        }
-        else{
-        	var allowedExts = false;
-        }
+
+        emailjs.init("o8NTZgjCgqK0ZP3bZ"); // Replace with your EmailJS user ID
+
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+          event.preventDefault(); // Prevent the form from submitting the traditional way
+      
+          // Collect form data
+          const name = document.getElementById('name').value;
+          const email = document.getElementById('email').value;
+          const message = document.getElementById('message').value;
+      
+          // Send the email
+          emailjs.send("service_2jxzn6k", "template_45k2l7b", {
+            name: name,
+            email: email,
+            message: message
+          })
+          .then(function(response) {
+            alert('Email sent successfully!');
+          }, function(error) {
+            alert('Failed to send email: ' + error.text);
+          });
+        });
+        // if($(form_id).find('input#attach_file').length > 0)
+        // {
+        // 	var attachedFile = $(form_id).find('input#attach_file')[0];
+        // if(attachedFile.hasAttribute("file_extension")){
+        // 	var allowedExts = attachedFile.getAttribute("file_extension");
+        // }
+        // else{
+        // 	var allowedExts = false;
+        // }
         
-        if(attachedFile.hasAttribute("size")){
-	    	var allwdsize = attachedFile.getAttribute("size");
-	    }else{
-        	var allwdsize = false;
-        }
+        // if(attachedFile.hasAttribute("size")){
+	    // 	var allwdsize = attachedFile.getAttribute("size");
+	    // }else{
+        // 	var allwdsize = false;
+        // }
         
-        var selected = attachedFile.files.length;
-        if( selected > 0)
-        {
-			var attach_file= uploadfile(form_id,allwdsize,allowedExts);
-		}
-        }
+        // var selected = attachedFile.files.length;
+        // if( selected > 0)
+        // {
+		// 	var attach_file= uploadfile(form_id,allwdsize,allowedExts);
+		// }
+        // }
 		
-        if (attach_file && validate(form_id)) {
-         	var isrecaptcha = false ;
+        // if (validate(form_id)) {
+        //  	// var isrecaptcha = false ;
     
-     		if(isrecaptcha){
-     			event.preventDefault();
-            	grecaptcha.ready(function() {
-                grecaptcha.execute('~sitekey', {action: 'submit'}).then(function(token) {
-                    sentmail(form_id, msg, token);
-                });
-            });
-   			}  else {
-   				sentmail(form_id, msg, '');
-   			}
+     	// 	// if(isrecaptcha){
+     	// 		event.preventDefault();
+        //     	// grecaptcha.ready(function() {
+        //         // grecaptcha.execute('~sitekey', {action: 'submit'}).then(function(token) {
+        //             // sentmail(form_id, msg, token);
+        //         // });
+        //     // });
+   		// 	// }  else {
+   		// 	// 	sentmail(form_id, msg, '');
+   		// 	}
         }
         return false;
 
-    });
+    // });
 
 });
 
