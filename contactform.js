@@ -1,7 +1,5 @@
 var msg_to_sent = "";
 
-
-
 function emailValidation(form_id, email) {
     jQuery(form_id + ' .has-error').hide();
     var emailExp = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,10}(?:\.[a-z]{2})?)$/i;
@@ -87,7 +85,10 @@ function validate(form_id) {
     });
     return result;
 }
- 
+
+
+
+
 jQuery(document).ready(function () {
 
 	$(this).find("input#attach_file").change(function () {
@@ -97,38 +98,26 @@ jQuery(document).ready(function () {
 		jQuery(inputspan).html(value);
 			});
 
-            function onSubmit(token) {
-                // document.getElementById("ContactForm0").submit();
-            // }
-    // jQuery("form").submit(function () {
-        // var form = $(this).attr('id');
-        var form_id = "#ContactForm0";
+    jQuery("form").submit(function () {
+        var form = $(this).attr('id');
+        var form_id = "#" + form;
         jQuery(form_id + ' .success').html('');
-		var attach_file = 'true';
-        var msg = jQuery(form_id + " .comment").val();
 
-        emailjs.init("o8NTZgjCgqK0ZP3bZ"); // Replace with your EmailJS user ID
+        // Replace with your EmailJS user ID
 
-        document.getElementById('contact-form').addEventListener('submit', function(event) {
-          event.preventDefault(); // Prevent the form from submitting the traditional way
+        // document.getElementById('ContactForm0').addEventListener('submit', function(event) {
+        //   event.preventDefault(); // Prevent the form from submitting the traditional way
       
           // Collect form data
           const name = document.getElementById('name').value;
           const email = document.getElementById('email').value;
-          const message = document.getElementById('message').value;
+          const message = document.getElementById('comment').value;
       
           // Send the email
-          emailjs.send("service_2jxzn6k", "template_45k2l7b", {
-            name: name,
-            email: email,
-            message: message
-          })
-          .then(function(response) {
-            alert('Email sent successfully!');
-          }, function(error) {
-            alert('Failed to send email: ' + error.text);
-          });
-        });
+         
+        // });
+		// var attach_file = 'true';
+        // var msg = jQuery(form_id + " .comment").val();
         // if($(form_id).find('input#attach_file').length > 0)
         // {
         // 	var attachedFile = $(form_id).find('input#attach_file')[0];
@@ -152,23 +141,36 @@ jQuery(document).ready(function () {
 		// }
         // }
 		
-        // if (validate(form_id)) {
-        //  	// var isrecaptcha = false ;
+        if (validate(form_id)) {
+         	// var isrecaptcha = false ;
     
-     	// 	// if(isrecaptcha){
-     	// 		event.preventDefault();
-        //     	// grecaptcha.ready(function() {
-        //         // grecaptcha.execute('~sitekey', {action: 'submit'}).then(function(token) {
-        //             // sentmail(form_id, msg, token);
-        //         // });
-        //     // });
-   		// 	// }  else {
-   		// 	// 	sentmail(form_id, msg, '');
-   		// 	}
+     		// if(isrecaptcha){
+     		// 	event.preventDefault();
+            // 	grecaptcha.ready(function() {
+            //     grecaptcha.execute('~sitekey', {action: 'submit'}).then(function(token) {
+            //         sentmail(form_id, msg, token);
+            //     });
+            // });
+   			// }  else {
+   			// 	sentmail(form_id, msg, '');
+   			// }
+
+               emailjs.send("service_2jxzn6k", "template_45k2l7b", {
+                to_name: 'Tirupati Packers Movers',
+                from_name: name,
+                email: email,
+                message: message
+              })
+              .then(function(response) {
+                alert('Email sent successfully!');
+                window.location.reload();
+              }, function(error) {
+                alert('Failed to send email: ' + error.text);
+              });
         }
         return false;
 
-    // });
+    });
 
 });
 
