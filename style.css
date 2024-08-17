@@ -3079,7 +3079,8 @@ padding:0 0 0 20px;
 padding:0;
  list-style:none;
 position:relative;
-margin:auto;
+/* margin:auto; */
+margin: auto 10px auto 200px;
 float:none;
 border:0 !important;
 padding-top:0 !important;
