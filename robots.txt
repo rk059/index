@@ -1,0 +1,14 @@
+# robots.txt for https://tirupatipackers.com
+# Tirupati Packers and Movers - Bengaluru
+
+User-agent: *
+Allow: /
+
+# Nothing on this site needs to be hidden from crawlers. CSS, JS and images
+# must stay crawlable so Google can render and evaluate the pages.
+
+# Housekeeping files that carry no search value
+Disallow: /contactform.php
+Disallow: /404.html
+
+Sitemap: https://tirupatipackers.com/sitemap.xml

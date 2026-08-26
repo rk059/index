@@ -7244,3 +7244,57 @@ max-width:100%!important; ;}
 #ttr_header_inner > *{
   font-size: 1.1rem !important;
 }
+
+/* ---- SEO content sections (added 2026-08) -------------------------------
+   These use their own class rather than .container: the homepage redefines
+   .container as a centred grid, which would size children to max-content and
+   push the page wider than the viewport on mobile. */
+.ttr-sec{max-width:1100px;margin:34px auto;padding:0 16px;box-sizing:border-box}
+.ttr-sec > *{max-width:100%}
+.ttr-sec img{max-width:100%;height:auto}
+.ttr-sec table{width:100%;max-width:100%}
+.ttr-sec ul,.ttr-sec ol{padding-left:22px}
+.ttr-crumbs{max-width:1100px;margin:0 auto;padding:14px 16px 0;font-size:14px;color:#666;box-sizing:border-box}
+.ttr-crumbs a{color:#910000}
+.ttr-form-status a{text-decoration:underline}
+@media (max-width:575px){.ttr-sec{margin:24px auto}.ttr-sec h1{font-size:1.6rem!important}.ttr-sec h2{font-size:1.25rem!important}}
+
+/* Full-width area buttons carry long labels ("Maruthi Nagar, Bangalore");
+   the inherited .btn nowrap pushed them past their column on narrow screens. */
+.btn.w-100{white-space:normal;word-break:break-word}
+
+/* Long unbroken strings (the email address) overflowed 320px viewports. */
+main p, main li, main td, main th, .ttr-sec{overflow-wrap:break-word}
+/* `break-word` does not shrink min-content width, so long tokens such as the
+   email address still forced a scrollbar at 320px. `anywhere` does. */
+main b, main strong, main a[href^="mailto:"], .ttr-sec a[href^="mailto:"]{overflow-wrap:anywhere}
+
+/* Inline article photos on the area pages: keep them inside their column and
+   let them drop below the text on small screens instead of forcing a scroll. */
+.ttr-inline-photo{display:block;float:right;width:46%;max-width:100%;margin:0 0 16px 20px}
+.ttr-inline-photo img{width:100%;height:auto;border-radius:6px}
+@media (max-width:767px){
+  .ttr-inline-photo{float:none;width:100%;margin:0 0 16px}
+  .ttr-area-hero{float:none!important;width:100%!important;margin:0 0 16px!important}
+}
+
+/* The nav gained a Bangalore hub link (7 items); tighten spacing on mid-size
+   desktops so it never runs under the CALL NOW button. */
+@media (min-width:1200px) and (max-width:1319px){
+  .ttr_menu_items > li > a{padding-left:10px!important;padding-right:10px!important;font-size:13px!important;letter-spacing:0!important}
+}
+/* Between 992px and 1199px the Bootstrap container drops to 960px and the
+   absolutely positioned logo and CALL NOW button collided with the menu.
+   Tighten the links and drop the duplicate CTA - both phone numbers are already
+   in the bar directly above, and every page carries its own call button. */
+@media (min-width:992px) and (max-width:1199px){
+  .ttr_menu_items > li > a{padding-left:7px!important;padding-right:7px!important;font-size:12.5px!important;letter-spacing:0!important}
+  .ttr_menushape1{display:none!important}
+}
+
+/* Shrink the header logo where the container narrows, so the centred menu
+   clears it instead of running underneath. */
+@media (min-width:992px) and (max-width:1319px){
+  .ttr_menu_logo img{max-width:210px!important;height:auto!important}
+}
+                                                                                                                  
