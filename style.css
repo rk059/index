@@ -7294,7 +7294,6 @@ main b, main strong, main a[href^="mailto:"], .ttr-sec a[href^="mailto:"]{overfl
 
 /* Shrink the header logo where the container narrows, so the centred menu
    clears it instead of running underneath. */
-@media (min-width:992px) and (max-width:1319px){
-  .ttr_menu_logo img{max-width:210px!important;height:auto!important}
+@media (min-width:992px){
+  .ttr_menu_logo img{max-width:230px!important;height:auto!important}
 }
-                                                                                                                  
